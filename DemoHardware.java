@@ -16,6 +16,8 @@ public class DemoHardware {
 
      public BNO055IMU gyro;
 
+     public DcMotor robotClaw;
+
      public static double maxSpeed = 1;
 
      private static DemoHardware myInstance = null;
@@ -35,8 +37,7 @@ public class DemoHardware {
                rightWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                rightWheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                rightWheel.setPower(0);
-          }
-          catch(Exception p_exception) {
+          } catch (Exception p_exception) {
                rightWheel = null;
           }
           try {
@@ -45,28 +46,35 @@ public class DemoHardware {
                leftWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
                leftWheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                leftWheel.setPower(0);
-          }
-          catch(Exception p_exception) {
+          } catch (Exception p_exception) {
                leftWheel = null;
           }
-
-
           try {
-               gyro = hwMap.get(BNO055IMU.class, "gyro");
-               BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
-               parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
-               parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
-               parameters.loggingEnabled = true;
-               parameters.loggingTag = "gyro";
-               gyro.initialize(parameters);
-          }
-          catch (Exception p_exception) {
-               gyro = null;
-          }
+               robotClaw = hwMap.get(DcMotor.class, "robotClaw");
+               robotClaw.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+               robotClaw.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+               robotClaw.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+               robotClaw.setPower(0);
+          } catch (Exception p_exception) {
+                    robotClaw = null;
+               }
 
-          try {
-               demoServo = hwMap.get(Servo.class, "demoServo");
-          }catch (Exception p_exception){
+
+               try {
+                    gyro = hwMap.get(BNO055IMU.class, "gyro");
+                    BNO055IMU.Parameters parameters = new BNO055IMU.Parameters();
+                    parameters.angleUnit = BNO055IMU.AngleUnit.DEGREES;
+                    parameters.accelUnit = BNO055IMU.AccelUnit.METERS_PERSEC_PERSEC;
+                    parameters.loggingEnabled = true;
+                    parameters.loggingTag = "gyro";
+                    gyro.initialize(parameters);
+               } catch (Exception p_exception) {
+                    gyro = null;
+               }
+
+               try {
+                    demoServo = hwMap.get(Servo.class, "demoServo");
+               } catch (Exception p_exception) {
                     demoServo = null;
                }
           }

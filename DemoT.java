@@ -23,6 +23,7 @@ public class DemoT extends LinearOpMode {
         }
         if (robot.leftWheel != null) {
             robot.leftWheel.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        }
 
         DemoHardware.maxSpeed = 1;
 
@@ -32,13 +33,13 @@ public class DemoT extends LinearOpMode {
 
         while (opModeIsActive()) {
 
-            double movement = gamepad1.left_stick_y;
-            double turning = gamepad1.right_stick_x;
+            double movement = -gamepad1.right_stick_x;
+            double turning = gamepad1.left_stick_y;
 
             double left = movement + turning;
             double right = movement - turning;
 
-            double  max = Math.max(Math.abs(left), Math.abs(right));
+            double max = Math.max(Math.abs(left), Math.abs(right));
             if (max > 1.0) {
                 left /= max;
                 right /= max;
@@ -51,9 +52,11 @@ public class DemoT extends LinearOpMode {
 
                 pressinga = true;
             } else if (gamepad1.a) {
-                    pressinga = false;
-                }
+                pressinga = false;
             }
+
+            robot.robotClaw.setPower(gamepad2.left_stick_y);
         }
     }
 }
+
