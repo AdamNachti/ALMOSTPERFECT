@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+import com.qualcomm.robotcore.util.Range;
 
 import org.firstinspires.ftc.teamcode.ALMOSTPERFECT.DemoHardware;
 
@@ -31,6 +32,12 @@ public class DemoT extends LinearOpMode {
 
         boolean pressinga = false;
 
+        boolean pressingRt = false;
+
+        boolean pressingLt = false;
+
+        boolean pressed = false;
+
         while (opModeIsActive()) {
 
             double movement = -gamepad1.right_stick_x;
@@ -55,7 +62,22 @@ public class DemoT extends LinearOpMode {
                 pressinga = false;
             }
 
-            robot.robotClaw.setPower(gamepad2.left_stick_y);
+            robot.clawExtension.setPower(gamepad2.left_stick_y);
+
+            robot.robotClawExtension.setPower(gamepad2.right_stick_x);
+
+            if ((gamepad2.right_trigger > 0.1) && !pressingRt) {
+                robot.robotClaw.setPosition(0.097);
+                pressingRt = true;
+            } else if (!(gamepad2.right_trigger > 0.1)) {
+                pressingRt = false;
+            }
+            if ((gamepad2.left_trigger > 0.1) && !pressingLt) {
+                robot.robotClaw.setPosition(.185);
+                pressingLt = true;
+            } else if (!(gamepad2.left_trigger > 0.1)) {
+                pressingLt = false;
+            }
         }
     }
 }

@@ -19,7 +19,6 @@ public class DemoAuto extends LinearOpMode {
 
         telemetry.addData("status", "initialized");
         telemetry.update();
-
         waitForStart();
 
         move(65, 1);
@@ -29,6 +28,9 @@ public class DemoAuto extends LinearOpMode {
             robot.setPower(1,1);
         }
         runtime.reset();
+        if (robot.colorSensor.red() > 10) {
+
+        }
 
     }
 
@@ -52,5 +54,6 @@ public class DemoAuto extends LinearOpMode {
         robot.rightWheel.setMode((DcMotor.RunMode.RUN_USING_ENCODER));
         robot.leftWheel.setMode((DcMotor.RunMode.RUN_USING_ENCODER));
     }
+
 }
 
