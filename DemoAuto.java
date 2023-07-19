@@ -21,16 +21,16 @@ public class DemoAuto extends LinearOpMode {
         telemetry.update();
         waitForStart();
 
-        move(65, 1);
+        move(65, .5);
 
-        runtime.reset();
+        /*runtime.reset();
         while (runtime.seconds() < 3) {
             robot.setPower(1,1);
         }
         runtime.reset();
         if (robot.colorSensor.red() > 10) {
 
-        }
+        }*/
 
     }
 
@@ -42,6 +42,15 @@ public class DemoAuto extends LinearOpMode {
         robot.setPower(0, 0);
         robot.rightWheel.setTargetPosition((int) Math.round(ticks));
         robot.leftWheel.setTargetPosition((int) Math.round(ticks));
+
+        robot.rightWheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+        robot.leftWheel.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
+
+        robot.rightWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        robot.leftWheel.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+
+        robot.rightWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        robot.leftWheel.setMode(DcMotor.RunMode.RUN_TO_POSITION);
 
         robot.setPower(speedMoving, speedMoving);
 

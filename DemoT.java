@@ -73,7 +73,7 @@ public class DemoT extends LinearOpMode {
                 pressingRt = false;
             }
             if ((gamepad2.left_trigger > 0.1) && !pressingLt) {
-                robot.robotClaw.setPosition(.185);
+                robot.robotClaw.setPosition(.205);
                 pressingLt = true;
             } else if (!(gamepad2.left_trigger > 0.1)) {
                 pressingLt = false;
